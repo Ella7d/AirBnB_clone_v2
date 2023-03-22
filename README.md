@@ -21,7 +21,7 @@ This repository contains the initial stage of a student project to build a clone
 | 10. Console 1.0 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
 <br>
 <br>
-<center> <h2>General Use</h2> </center>
+<center> <h2>General Uses</h2> </center>
 
 1. First clone this repository.
 
@@ -36,6 +36,7 @@ This repository contains the initial stage of a student project to build a clone
 5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
 ##### Commands
+
     * create - Creates an instance based on given class
 
     * destroy - Destroys an object based on class and UUID
@@ -50,6 +51,7 @@ This repository contains the initial stage of a student project to build a clone
 
 
 ##### Alternative Syntax
+
 Users are able to issue a number of console command using an alternative syntax:
 
 	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
@@ -71,6 +73,7 @@ Advanced syntax is implemented for the following commands:
 <h3>Primary Command Syntax</h3>
 
 ###### Example 0: Create an object
+
 Usage: create <class_name>
 ```
 (hbnb) create BaseModel
@@ -81,6 +84,7 @@ Usage: create <class_name>
 (hbnb)                   
 ```
 ###### Example 1: Show an object
+
 Usage: show <class_name> <_id>
 
 ```
