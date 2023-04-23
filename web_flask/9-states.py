@@ -1,41 +1,36 @@
 #!/usr/bin/python3
-""" Script that runs an app with Flask framework """
+""" Starts a Flask web app and fetches data fromstorage engine """
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from models.city import City
 
 
 app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def teardown_session(exception):
-    """ Teardown """
+def close_session(cls):
+    """ Closes Session """
     storage.close()
 
 
-@app.route('/states/', strict_slashes=False)
+@app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
-def display_html(id=None):
-    """ Function called with /states route """
-    states = storage.all(State)
+def states_state(id=None):
+    """ Lists states from storage engine """
+    if id:
+        states = storage.all(State)
+        key = 'State.' + id
+        if key in states:
+            state = states[key]
+        else:
+            state = None
+        states = []
+    else:
+        states = list(storage.all(State).values())
+    return render_template('9-states.html', **locals())
 
-    if not id:
-        dict_to_html = {value.id: value.name for value in states.values()}
-        return render_template('7-states_list.html',
-                               Table="States",
-                               items=dict_to_html)
 
-    k = "State.{}".format(id)
-    if k in states:
-        return render_template('9-states.html',
-                               Table="State: {}".format(states[k].name),
-                               items=states[k])
-
-    return render_template('9-states.html',
-                           items=None)
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
-
+if __name__ == '__main__':
+    storage.reload()
+    app.run("0.0.0.0", 5000)
